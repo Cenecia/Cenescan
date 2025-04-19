@@ -1,8 +1,0 @@
-{
-    "name": "frontend",
-    "version": "1.0.0",
-    "scripts": {
-      "start": "echo \"React app would run here\" && sleep infinity"
-    }
-  }
-  
