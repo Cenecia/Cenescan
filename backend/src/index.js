@@ -3,6 +3,7 @@ const connectDB = require('./db');
 const authRoutes = require('./routes/auth');
 const authMiddleware = require('./middleware/auth');
 const cors = require('cors');
+const campaignRoutes = require('./routes/campaign');
 
 const app = express();
 const PORT = 5000;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', authRoutes);
+app.use('/api/campaigns', campaignRoutes);
 
 // Protected route example
 app.get('/api/protected', authMiddleware, (req, res) => {
