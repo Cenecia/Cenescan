@@ -35,6 +35,7 @@ function Login() {
                  onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <button type="submit" className="btn btn-primary">Log In</button>
+        <a href='./register' className="btn btn-link">New account? Register!</a>
       </form>
     </div>
   );

@@ -17,7 +17,7 @@ RUN npm run build
 # OR: Use for dev with live reload (better for now)
 FROM node:18
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm install
-EXPOSE 3000
+
 CMD ["npm", "start"]
