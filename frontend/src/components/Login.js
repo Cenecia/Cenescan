@@ -12,6 +12,7 @@ function Login() {
     try {
       const res = await axios.post(`${API_BASE_URL}/api/login`, { email, password });
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', res.data.user);
       setMsg('Login successful!');
       window.location.href = '/protected';
     } catch (err) {
