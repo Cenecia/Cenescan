@@ -6,12 +6,12 @@ const router = express.Router();
 
 // Create a new campaign
 router.post('/', auth, async (req, res) => {
-  const { name } = req.body;
+  const { name, user } = req.body;
 
   try {
     const campaign = new Campaign({
       name,
-      user: req.user.id, // Associate the campaign with the authenticated user
+      user // Associate the campaign with the authenticated user
     });
 
     await campaign.save();
