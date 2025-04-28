@@ -11,16 +11,19 @@ function Protected() {
   const user = localStorage.getItem('user'); // Retrieve the user object from localStorage
   const token = localStorage.getItem('token'); // Retrieve the token from localStorage
 
+  const handleLogout = () => {
+    localStorage.removeItem('user'); // Remove user from localStorage
+    localStorage.removeItem('token'); // Remove token from localStorage
+    window.location.href = '/login'; // Redirect to login page
+  };
+
   const handleAddCampaign = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${API_BASE_URL}/api/campaigns`, 
         { name: newCampaignName, user },
         { headers: { Authorization: `Bearer ${token}`} }
-    );
-      // localStorage.setItem('token', res.data.token);
-      // localStorage.setItem('user', res.data.user);
-      // setMsg('Login successful!');
+      );
       window.location.href = '/protected';
     } catch (err) {
       console.log(err);
@@ -29,7 +32,6 @@ function Protected() {
   };
 
   useEffect(() => {
-    
     axios.get(`${API_BASE_URL}/api/protected`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -42,7 +44,7 @@ function Protected() {
     }
     axios.get(`${API_BASE_URL}/api/campaigns`, {
       headers: { Authorization: `Bearer ${token}` },
-      params: { user: user } // Pass the user ID as a query parameter
+      params: { user: user }
     })
       .then(res => setCampaigns(res.data))
       .catch(() => setError('Failed to fetch campaigns'));
@@ -50,6 +52,13 @@ function Protected() {
 
   return (
     <div>
+      {/* Logout Button */}
+      <div className="d-flex justify-content-end p-3">
+        <button className="btn btn-danger" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
       <h2>Protected Page</h2>
       <div className="alert alert-success">{message}</div>
       {error && <div className="alert alert-danger">{error}</div>}
